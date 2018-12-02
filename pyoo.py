@@ -14,6 +14,8 @@ import numbers
 import os
 import sys
 
+import sys
+sys.path.append('/usr/lib/python3/dist-packages/')
 import uno
 
 
@@ -1829,11 +1831,14 @@ class Desktop(_UnoProxy):
         document = self._open_url(url)
         return SpreadsheetDocument(document)
 
-    def open_spreadsheet(self, path, as_template=False):
+    def open_spreadsheet(self, path, as_template=False, extra = ()):
         """
         Opens an exiting spreadsheet document on the local file system.
-        """
-        extra = ()
+        """        
+        pv = uno.createUnoStruct('com.sun.star.beans.PropertyValue')
+        pv.Name = 'MacroExecutionMode'
+        pv.Value = 4
+        extra += (pv,)
         if as_template:
             pv = uno.createUnoStruct('com.sun.star.beans.PropertyValue')
             pv.Name = 'AsTemplate'
