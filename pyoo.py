@@ -15,7 +15,7 @@ import os
 import sys
 
 import sys
-sys.path.append('/usr/lib/python3/dist-packages/')
+sys.path.insert(0,'/usr/lib/python3/dist-packages/')
 import uno
 
 
